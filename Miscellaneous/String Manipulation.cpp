@@ -17,32 +17,36 @@ int stringlength(char str[])
 
 void stringCopy(char str1[], char str2[])
 {
-    for(int i = 0; i<stringlength(str1); i++)
+    int length = stringlength(str1);
+
+    for(int i = 0; i<length; i++)
     {
         str2[i] = str1[i];
     }
 }
 
-void stringReverse(char str1[], char str2[])
+char* stringReverse(char str1[])
 {
+    //found problematic
+
     int j = 0, i;
+    char str2[150];
+    int length = stringlength(str1);
 
-    for( i = stringlength(str1)-1; i>=0; i--)
-    {
-
+    for(i = length-1; i>=0; i--)
         str2[j++] = str1[i];
 
-    }
+    str2[j] = '\0';
 
-    str2[i] = '\0';
+    return str2;
 
 }
 
 int stringCompare(char str1[], char str2[])
 {
-    int i, j;
+    int i;
 
-    for(i = 0; str1[i]!= '\0' && str2[i]!= '\0'; i++)
+    for(i = 0; str1[i]!= '\0' || str2[i]!= '\0'; i++)
     {
         if(str1[i]>str2[i])
             return 1;
@@ -59,7 +63,21 @@ int stringCompare(char str1[], char str2[])
     if(stringlength(str1)<stringlength(str2))
         return -1;
 
+}
 
+char* stringConcat(char str1[], char str2[])
+{
+    int i = stringlength(str1);
+    int j = 0;
+    int length = stringlength(str2);
+
+    while(j<length)
+    {
+        str1[i++] = str2[j++];
+    }
+    str1[i] = '\0';
+
+    return str1;
 }
 
 
@@ -70,12 +88,8 @@ int main()
     char str2[30];
 
     gets(data);
-
     gets(str2);
-
-    cout<<stringCompare(data, str2);
-
-
+    cout<<stringConcat(data, str2);
 
     return 0;
 }
